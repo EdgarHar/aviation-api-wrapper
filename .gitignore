@@ -1,0 +1,30 @@
+# IDE
+*.iml
+.idea/
+*.swp
+.vscode/
+
+# Build
+**/target/
+*.class
+*.jar
+!.mvn/wrapper/maven-wrapper.jar
+
+# Logs
+*.log
+logs/
+
+# OS
+**/.DS_Store
+.DS_Store
+Thumbs.db
+
+# Environment / Secrets
+.env
+*.env
+application-local.yml
+application-local.properties
+
+# Test outputs
+/coverage/
+*.exec
