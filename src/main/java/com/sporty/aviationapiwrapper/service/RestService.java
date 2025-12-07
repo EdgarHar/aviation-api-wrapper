@@ -65,6 +65,7 @@ public class RestService {
               .map(
                   spec -> spec.retrieve().toEntity(request.getResponseType()));
 
+      log.info("Request to {} successful.", url);
       return response.map(ResponseEntity::getBody);
     } catch (Exception e) {
       log.error("Request failed for URL: {}. Message: {}", url, e.getMessage());

@@ -12,18 +12,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AviationApiAirportData {
     private String city;
-    @JsonProperty("state_full")
-    private String stateFull;
     private String county;
     private String elevation;
     private String latitude;
     private String longitude;
     private String use;
-    @JsonProperty("control_tower")
-    private String controlTower;
     private String ctaf;
     private String unicom;
     private String status;
+    @JsonProperty("control_tower")
+    private String controlTower;
+    @JsonProperty("state_full")
+    private String stateFull;
     @JsonProperty("notam_facility_ident")
     private String notamFacilityIdent;
     @JsonProperty("responsible_artcc")
