@@ -1,7 +1,8 @@
 package com.sporty.aviationapiwrapper.service;
 
 import com.sporty.aviationapiwrapper.dto.AirportInfo;
-import lombok.RequiredArgsConstructor;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
@@ -10,20 +11,38 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class AirportCacheService {
 
     private static final String CACHE_NAME = "airports";
 
     private final CacheManager cacheManager;
+    private final Counter cacheHitCounter;
+    private final Counter cacheMissCounter;
+
+    public AirportCacheService(CacheManager cacheManager, MeterRegistry meterRegistry) {
+        this.cacheManager = cacheManager;
+        this.cacheHitCounter = Counter.builder("airport.cache.hits")
+                .description("Number of cache hits for airport lookups")
+                .tag("cache", CACHE_NAME)
+                .register(meterRegistry);
+        this.cacheMissCounter = Counter.builder("airport.cache.misses")
+                .description("Number of cache misses for airport lookups")
+                .tag("cache", CACHE_NAME)
+                .register(meterRegistry);
+    }
 
     public Optional<AirportInfo> get(String icaoCode) {
         return getCache()
                 .flatMap(cache -> Optional.ofNullable(cache.get(normalizeKey(icaoCode), AirportInfo.class)))
                 .map(info -> {
+                    cacheHitCounter.increment();
                     log.debug("Cache hit for ICAO: {}", icaoCode);
                     return info;
+                })
+                .or(() -> {
+                    cacheMissCounter.increment();
+                    return Optional.empty();
                 });
     }
 
