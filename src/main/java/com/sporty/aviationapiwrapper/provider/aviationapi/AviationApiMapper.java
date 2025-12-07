@@ -1,8 +1,7 @@
 package com.sporty.aviationapiwrapper.provider.aviationapi;
 
-import com.sporty.aviationapiwrapper.dto.AviationApiAirportData;
 import com.sporty.aviationapiwrapper.dto.AirportInfo;
-import com.sporty.aviationapiwrapper.util.NumberParseUtils;
+import com.sporty.aviationapiwrapper.dto.AviationApiAirportData;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,13 +13,13 @@ public class AviationApiMapper {
         return AirportInfo.builder()
                 .icao(icaoCode.toUpperCase())
                 .iata(null)
-                .name(null)
+                .name(data.getFacilityName())
                 .city(data.getCity())
                 .region(data.getStateFull())
                 .country("US")
-                .latitude(NumberParseUtils.parseDouble(data.getLatitude()))
-                .longitude(NumberParseUtils.parseDouble(data.getLongitude()))
-                .elevationFt(NumberParseUtils.parseInteger(data.getElevation()))
+                .latitude(data.getLatitude())
+                .longitude(data.getLongitude())
+                .elevationFt(data.getElevation())
                 .timezone(null)
                 .source(SOURCE)
                 .build();

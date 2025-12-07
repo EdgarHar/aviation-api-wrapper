@@ -2,7 +2,6 @@ package com.sporty.aviationapiwrapper.provider.apininjas;
 
 import com.sporty.aviationapiwrapper.dto.AirportInfo;
 import com.sporty.aviationapiwrapper.provider.apininjas.dto.ApiNinjasAirport;
-import com.sporty.aviationapiwrapper.util.NumberParseUtils;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,9 +17,9 @@ public class ApiNinjasMapper {
                 .city(airport.getCity())
                 .region(airport.getRegion())
                 .country(airport.getCountry())
-                .latitude(NumberParseUtils.parseDouble(airport.getLatitude()))
-                .longitude(NumberParseUtils.parseDouble(airport.getLongitude()))
-                .elevationFt(NumberParseUtils.parseInteger(airport.getElevationFt()))
+                .latitude(airport.getLatitude())
+                .longitude(airport.getLongitude())
+                .elevationFt(airport.getElevationFt())
                 .timezone(airport.getTimezone())
                 .source(SOURCE)
                 .build();

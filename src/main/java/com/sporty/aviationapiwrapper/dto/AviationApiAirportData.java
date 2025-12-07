@@ -24,8 +24,8 @@ public class AviationApiAirportData {
     private String controlTower;
     @JsonProperty("state_full")
     private String stateFull;
-    @JsonProperty("notam_facility_ident")
-    private String notamFacilityIdent;
+    @JsonProperty("facility_name")
+    private String facilityName;
     @JsonProperty("responsible_artcc")
     private String responsibleArtcc;
     @JsonProperty("responsible_artcc_name")

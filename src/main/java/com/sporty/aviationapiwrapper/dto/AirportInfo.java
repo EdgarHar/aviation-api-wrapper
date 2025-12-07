@@ -18,9 +18,9 @@ public class AirportInfo implements Serializable {
     private String city;
     private String region;
     private String country;
-    private Double latitude;
-    private Double longitude;
-    private Integer elevationFt;
+    private String latitude;
+    private String longitude;
+    private String elevationFt;
     private String timezone;
     private String source;
 }

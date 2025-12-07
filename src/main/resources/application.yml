@@ -19,16 +19,18 @@ logging:
   level:
     com.sporty.aviationapiwrapper: DEBUG
     io.github.resilience4j.retry: DEBUG
+    com.sporty.aviationapiwrapper.provider.aviationapi.AviationApiFeignClient: DEBUG
+    com.sporty.aviationapiwrapper.provider.apininjas.ApiNinjasFeignClient: DEBUG
 
 api:
   providers:
     aviationApi:
-      baseUrl: https://api.aviationapi.com/v1
+      baseUrl: https://api.aviationapi.com/v11
       timeout: 5000
       endpoints:
         airports: /airports
     apiNinjas:
-      baseUrl: https://api.api-ninjas.com/v1
+      baseUrl: https://api.api-ninjas.com/v11
       apiKey: ${APININJAS_API_KEY:}
       timeout: 5000
       endpoints:
@@ -79,12 +81,12 @@ resilience4j:
         max-attempts: 2
         wait-duration: 500ms
         enable-exponential-backoff: true
-        exponential-backoff-multiplier: 4
+        exponential-backoff-multiplier: 2
         exponential-max-wait-duration: 2s
         retry-exceptions:
           - java.io.IOException
           - java.util.concurrent.TimeoutException
-          - org.springframework.web.client.RestClientException
+          - feign.FeignException
         ignore-exceptions:
           - java.lang.IllegalArgumentException
     instances:
@@ -94,7 +96,7 @@ resilience4j:
         event-consumer-buffer-size: 100
       apiNinjas:
         base-config: default
-        max-attempts: 3
+        max-attempts: 2
         wait-duration: 400ms
         event-consumer-buffer-size: 100
     metrics:

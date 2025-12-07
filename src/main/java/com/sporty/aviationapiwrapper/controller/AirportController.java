@@ -1,6 +1,7 @@
 package com.sporty.aviationapiwrapper.controller;
 
 import com.sporty.aviationapiwrapper.dto.AirportInfo;
+import com.sporty.aviationapiwrapper.exception.AirportNotFoundException;
 import com.sporty.aviationapiwrapper.service.AirportService;
 import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +25,8 @@ public class AirportController {
             @PathVariable("icao")
             @Pattern(regexp = "^[A-Z]{4}$", message = "ICAO code must be exactly 4 uppercase letters")
             String icaoCode) {
-        return airportService.getAirportByIcao(icaoCode)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok(airportService.getAirportByIcao(icaoCode)
+                .orElseThrow(() -> new AirportNotFoundException(
+                        "Airport not found for ICAO code: " + icaoCode)));
     }
 }
