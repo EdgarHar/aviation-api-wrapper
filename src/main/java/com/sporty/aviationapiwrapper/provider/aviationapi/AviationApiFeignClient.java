@@ -1,7 +1,7 @@
 package com.sporty.aviationapiwrapper.provider.aviationapi;
 
 import com.sporty.aviationapiwrapper.config.feign.AviationApiFeignConfig;
-import com.sporty.aviationapiwrapper.provider.aviationapi.dto.AirportResponse;
+import com.sporty.aviationapiwrapper.dto.AviationApiAirportResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,5 +14,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface AviationApiFeignClient {
 
     @GetMapping("${api.providers.aviationApi.endpoints.airports}")
-    AirportResponse getAirport(@RequestParam("apt") String icaoCode);
+    AviationApiAirportResponse getAirport(@RequestParam("apt") String icaoCode);
 }

@@ -12,7 +12,7 @@ public class ApiNinjasFeignConfig {
     @Value("${api.providers.apiNinjas.timeout:5000}")
     private int timeout;
 
-    @Bean
+    @Bean("apiNinjasRequestOptions")
     public Request.Options requestOptions() {
         return new Request.Options(
             timeout, TimeUnit.MILLISECONDS,
@@ -21,7 +21,7 @@ public class ApiNinjasFeignConfig {
         );
     }
 
-    @Bean
+    @Bean("apiNinjasFeignLoggerLevel")
     public Logger.Level feignLoggerLevel() {
         return Logger.Level.BASIC;
     }

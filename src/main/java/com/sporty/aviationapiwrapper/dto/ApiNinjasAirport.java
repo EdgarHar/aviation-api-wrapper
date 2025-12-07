@@ -1,4 +1,4 @@
-package com.sporty.aviationapiwrapper.provider.apininjas.dto;
+package com.sporty.aviationapiwrapper.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

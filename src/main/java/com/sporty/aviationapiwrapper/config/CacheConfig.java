@@ -19,6 +19,13 @@ public class CacheConfig {
 
     private final CacheProperties cacheProperties;
 
+    /**
+     * Configures Redis cache manager with custom TTL settings for different cache regions.
+     * Serializes keys as strings and values as JSON.
+     *
+     * @param connectionFactory Redis connection factory for establishing connections
+     * @return configured RedisCacheManager instance
+     */
     @Bean
     public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
         RedisCacheConfiguration defaultConfig = RedisCacheConfiguration.defaultCacheConfig()

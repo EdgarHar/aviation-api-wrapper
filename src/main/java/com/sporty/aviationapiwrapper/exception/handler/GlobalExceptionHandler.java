@@ -3,16 +3,15 @@ package com.sporty.aviationapiwrapper.exception.handler;
 import com.sporty.aviationapiwrapper.dto.ErrorResponse;
 import com.sporty.aviationapiwrapper.exception.AirportNotFoundException;
 import com.sporty.aviationapiwrapper.exception.AirportProviderNotFoundException;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.ConstraintViolationException;
-import java.time.LocalDateTime;
 
 @RestControllerAdvice
 @Slf4j

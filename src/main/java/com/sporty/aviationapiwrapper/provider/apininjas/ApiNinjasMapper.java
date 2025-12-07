@@ -1,7 +1,7 @@
 package com.sporty.aviationapiwrapper.provider.apininjas;
 
 import com.sporty.aviationapiwrapper.dto.AirportInfo;
-import com.sporty.aviationapiwrapper.provider.apininjas.dto.ApiNinjasAirport;
+import com.sporty.aviationapiwrapper.dto.ApiNinjasAirport;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,8 +1,6 @@
 spring:
   application:
     name: aviation-api-wrapper
-  main:
-    allow-bean-definition-overriding: true
   cache:
     type: redis
   data:
@@ -25,12 +23,12 @@ logging:
 api:
   providers:
     aviationApi:
-      baseUrl: https://api.aviationapi.com/v11
+      baseUrl: https://api.aviationapi.com/v1
       timeout: 5000
       endpoints:
         airports: /airports
     apiNinjas:
-      baseUrl: https://api.api-ninjas.com/v11
+      baseUrl: https://api.api-ninjas.com/v1
       apiKey: ${APININJAS_API_KEY:}
       timeout: 5000
       endpoints:
@@ -65,6 +63,8 @@ resilience4j:
         max-wait-duration-in-half-open-state: 20s
         permitted-number-of-calls-in-half-open-state: 3
         automatic-transition-from-open-to-half-open-enabled: true
+        ignore-exceptions:
+          - java.lang.IllegalArgumentException
     instances:
       aviationApi:
         base-config: default
@@ -103,3 +103,12 @@ resilience4j:
       enabled: true
       legacy:
         enabled: false
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    tags-sorter: alpha
+    operations-sorter: alpha
+  show-actuator: false

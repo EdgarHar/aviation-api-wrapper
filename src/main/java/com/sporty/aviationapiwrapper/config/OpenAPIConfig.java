@@ -17,6 +17,13 @@ public class OpenAPIConfig {
     @Value("${spring.application.name}")
     private String applicationName;
 
+    /**
+     * Configures OpenAPI documentation with API metadata and server information.
+     * Provides Swagger UI with comprehensive API details including title, description,
+     * version, license, and available servers.
+     *
+     * @return OpenAPI configuration for API documentation
+     */
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()

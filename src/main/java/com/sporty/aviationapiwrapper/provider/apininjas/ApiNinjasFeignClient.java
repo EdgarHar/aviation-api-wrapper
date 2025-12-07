@@ -1,7 +1,7 @@
 package com.sporty.aviationapiwrapper.provider.apininjas;
 
 import com.sporty.aviationapiwrapper.config.feign.ApiNinjasFeignConfig;
-import com.sporty.aviationapiwrapper.provider.apininjas.dto.ApiNinjasAirport;
+import com.sporty.aviationapiwrapper.dto.ApiNinjasAirport;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;

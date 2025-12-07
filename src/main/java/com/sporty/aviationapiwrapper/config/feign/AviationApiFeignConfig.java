@@ -12,7 +12,7 @@ public class AviationApiFeignConfig {
     @Value("${api.providers.aviationApi.timeout:5000}")
     private int timeout;
 
-    @Bean
+    @Bean("aviationApiRequestOptions")
     public Request.Options requestOptions() {
         return new Request.Options(
             timeout, TimeUnit.MILLISECONDS,
@@ -21,7 +21,7 @@ public class AviationApiFeignConfig {
         );
     }
 
-    @Bean
+    @Bean("aviationApiFeignLoggerLevel")
     public Logger.Level feignLoggerLevel() {
         return Logger.Level.BASIC;
     }

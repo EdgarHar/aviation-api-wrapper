@@ -194,5 +194,5 @@ AI assistance (Claude) was used for:
 - **Test Generation**: Unit test scaffolding for and integration tests
 - **Resilience4j Configuration**: Initial circuit breaker and retry parameters in `application.yml`
 - **Grafana Dashboard JSON**: Prometheus query syntax and panel configurations
+- **Javadoc**: Generated overall javadocs based on code
 - **README file**: README file generation
-- 

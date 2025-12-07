@@ -16,6 +16,14 @@ public class AirportService {
     private final AirportDataProvider airportDataProvider;
     private final AirportCacheService cacheService;
 
+    /**
+     * Retrieves airport information by ICAO code with caching support.
+     * First checks the cache, and if not found, fetches from the provider
+     * and caches the result for subsequent requests.
+     *
+     * @param icaoCode the ICAO airport code (4-letter code)
+     * @return Optional containing airport information if found, empty otherwise
+     */
     public Optional<AirportInfo> getAirportByIcao(String icaoCode) {
         return cacheService.get(icaoCode)
                 .or(() -> fetchAndCache(icaoCode));
