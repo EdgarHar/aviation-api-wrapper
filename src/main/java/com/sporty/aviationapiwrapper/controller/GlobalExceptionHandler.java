@@ -1,6 +1,7 @@
 package com.sporty.aviationapiwrapper.controller;
 
 import com.sporty.aviationapiwrapper.dto.ErrorResponse;
+import com.sporty.aviationapiwrapper.exception.AirportProviderNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ErrorResponse> handleTypeMismatch(MethodArgumentTypeMismatchException e) {
         return createErrorResponse("Invalid parameter format", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AirportProviderNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleAirportProviderNotFound(AirportProviderNotFoundException e) {
+        return createErrorResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(Exception.class)

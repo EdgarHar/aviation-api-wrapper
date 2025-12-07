@@ -3,6 +3,17 @@ spring:
     name: aviation-api-wrapper
   main:
     allow-bean-definition-overriding: true
+  cache:
+    type: redis
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 2000ms
+
+cache:
+  default-ttl: 10m
+  airports-ttl: 15m
 
 logging:
   level:

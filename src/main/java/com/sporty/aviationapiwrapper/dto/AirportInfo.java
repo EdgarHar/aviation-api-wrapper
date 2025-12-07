@@ -1,11 +1,17 @@
 package com.sporty.aviationapiwrapper.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 @Data
 @Builder
-public class AirportInfo {
+@NoArgsConstructor
+@AllArgsConstructor
+public class AirportInfo implements Serializable {
     private String icao;
     private String iata;
     private String name;
