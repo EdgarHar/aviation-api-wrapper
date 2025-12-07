@@ -1,0 +1,92 @@
+spring:
+  application:
+    name: aviation-api-wrapper
+  main:
+    allow-bean-definition-overriding: true
+
+logging:
+  level:
+    com.sporty.aviationapiwrapper: DEBUG
+    io.github.resilience4j.retry: DEBUG
+
+api:
+  providers:
+    aviationApi:
+      baseUrl: https://api.aviationapi.com/v1
+      timeout: 5000
+      endpoints:
+        airports: /airports
+    apiNinjas:
+      baseUrl: https://api.api-ninjas.com/v1
+      apiKey: ${APININJAS_API_KEY:}
+      timeout: 5000
+      endpoints:
+        airports: /airports
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,circuitbreakerevents,retries,retryevents
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+  simple:
+    metrics:
+      export:
+        enabled: true
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        failure-rate-threshold: 50
+        minimum-number-of-calls: 5
+        sliding-window-size: 10
+        permitted-number-of-calls-in-half-open-state: 3
+        max-wait-duration-in-half-open-state: 10s
+        slow-call-rate-threshold: 60
+        slow-call-duration-threshold: 3s
+        wait-duration-in-open-state: 20s
+        automatic-transition-from-open-to-half-open-enabled: true
+    instances:
+      aviationApi:
+        base-config: default
+        register-health-indicator: true
+      apiNinjas:
+        base-config: default
+        register-health-indicator: true
+        wait-duration-in-open-state: 30s
+        slow-call-duration-threshold: 4s
+
+  retry:
+    configs:
+      default:
+        max-attempts: 2
+        wait-duration: 500ms
+        enable-exponential-backoff: true
+        exponential-backoff-multiplier: 4
+        exponential-max-wait-duration: 2s
+        retry-exceptions:
+          - java.io.IOException
+          - java.util.concurrent.TimeoutException
+          - org.springframework.web.client.RestClientException
+        ignore-exceptions:
+          - java.lang.IllegalArgumentException
+    instances:
+      aviationApi:
+        base-config: default
+        enable-exponential-backoff: true
+        event-consumer-buffer-size: 100
+      apiNinjas:
+        base-config: default
+        max-attempts: 3
+        wait-duration: 400ms
+        event-consumer-buffer-size: 100
+    metrics:
+      enabled: true
+      legacy:
+        enabled: false
